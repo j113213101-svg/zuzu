@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+:root {
+  /* Morandi palette — warm oatmeal, sage, terracotta */
+  --zz-bg: #f5efe5;
+  --zz-bg-soft: #ece3d4;
+  --zz-bg-warm: #e7d9c3;
+  --zz-fg: #3a332d;
+  --zz-fg-muted: #8c7f72;
+  --zz-line: #d9cdb9;
+  --zz-line-soft: #e3d9c7;
+  --zz-sage: #8fa08a;
+  --zz-sage-deep: #6f846d;
+  --zz-terracotta: #c2806a;
+  --zz-terracotta-deep: #a96651;
+  --zz-ochre: #c9a976;
+  --zz-dust: #c7a59c;
+  --zz-accent: #8fa08a;
+  --zz-accent-hover: #6f846d;
+
+  --zz-radius-sm: 6px;
+  --zz-radius: 14px;
+  --zz-radius-lg: 24px;
+  --zz-shadow-sm: 0 1px 2px rgba(82, 66, 48, 0.05);
+  --zz-shadow-md: 0 14px 34px rgba(82, 66, 48, 0.08);
+  --zz-shadow-lg: 0 30px 60px rgba(82, 66, 48, 0.1);
+}
+
+@theme inline {
+  --color-bg: var(--zz-bg);
+  --color-bg-soft: var(--zz-bg-soft);
+  --color-fg: var(--zz-fg);
+  --color-fg-muted: var(--zz-fg-muted);
+  --color-line: var(--zz-line);
+  --color-accent: var(--zz-accent);
+  --color-sage: var(--zz-sage);
+  --color-terracotta: var(--zz-terracotta);
+  --font-sans: "Inter", "Noto Sans TC", -apple-system, BlinkMacSystemFont, "PingFang TC", sans-serif;
+  --font-serif: "Cormorant Garamond", "Noto Serif TC", "Source Han Serif TC", "PingFang TC", ui-serif, Georgia, serif;
+}
+
+html, body {
+  background: var(--zz-bg);
+  color: var(--zz-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.005em;
+}
+
+/* Subtle paper grain for boutique warmth */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(rgba(138, 110, 80, 0.035) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: multiply;
+}
+
+* {
+  border-color: var(--zz-line);
+}
+
+.zz-headline {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.08;
+}
+
+.zz-kicker {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--zz-fg-muted);
+}
+
+.zz-rule {
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: var(--zz-fg-muted);
+  vertical-align: middle;
+  margin: 0 10px;
+}
+
+.zz-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 2px;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.zz-btn-primary {
+  background: var(--zz-fg);
+  color: var(--zz-bg);
+}
+.zz-btn-primary:hover {
+  background: var(--zz-sage-deep);
+  color: #fff;
+}
+
+.zz-btn-ghost {
+  color: var(--zz-fg);
+  border-bottom: 1px solid var(--zz-fg);
+  border-radius: 0;
+  padding: 4px 2px;
+  background: transparent;
+}
+.zz-btn-ghost:hover {
+  color: var(--zz-sage-deep);
+  border-color: var(--zz-sage-deep);
+}
+
+.zz-btn-outline {
+  border: 1px solid var(--zz-fg);
+  color: var(--zz-fg);
+  background: transparent;
+}
+.zz-btn-outline:hover {
+  background: var(--zz-fg);
+  color: var(--zz-bg);
+}
+
+.zz-card {
+  background: #fbf7ee;
+  border-radius: var(--zz-radius);
+  box-shadow: var(--zz-shadow-sm);
+  border: 1px solid var(--zz-line-soft);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.zz-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--zz-shadow-md);
+  border-color: var(--zz-line);
+}
+
+.zz-glass {
+  background: rgba(245, 239, 229, 0.85);
+  backdrop-filter: saturate(140%) blur(16px);
+  -webkit-backdrop-filter: saturate(140%) blur(16px);
+}
+
+.zz-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 2px;
+  border: 1px solid var(--zz-line);
+  background: #fbf7ee;
+  font-size: 15px;
+  color: var(--zz-fg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.zz-input:focus {
+  outline: none;
+  border-color: var(--zz-sage-deep);
+  box-shadow: 0 0 0 3px rgba(143, 160, 138, 0.18);
+}
+
+.zz-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #fbf7ee;
+  font-size: 13px;
+  color: var(--zz-fg);
+  border: 1px solid var(--zz-line);
+  transition: all 0.15s ease;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+.zz-chip:hover {
+  border-color: var(--zz-fg);
+}
+.zz-chip[data-active="true"] {
+  background: var(--zz-fg);
+  color: var(--zz-bg);
+  border-color: var(--zz-fg);
+}
+
+.zz-fade-in {
+  animation: zz-fade-in 0.7s ease both;
+}
+@keyframes zz-fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.zz-prose h2 { font-family: var(--font-serif); font-size: 28px; font-weight: 500; margin: 32px 0 12px; letter-spacing: -0.01em; }
+.zz-prose h3 { font-family: var(--font-serif); font-size: 22px; font-weight: 500; margin: 24px 0 10px; }
+.zz-prose p { color: var(--zz-fg); line-height: 1.85; margin: 0 0 16px; }
+.zz-prose ul { list-style: disc; padding-left: 22px; color: var(--zz-fg); line-height: 1.85; }
+
+/* Ensure content sits above grain */
+header, main, footer { position: relative; z-index: 1; }

@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Agent {
+  id         String     @id @default(cuid())
+  email      String     @unique
+  password   String
+  name       String
+  phone      String?
+  agency     String?
+  avatarUrl  String?
+  role       String     @default("agent")
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  properties Property[]
+  inquiries  Inquiry[]
+}
+
+model Property {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  district    String
+  address     String
+  price       Int
+  layout      String
+  area        Float
+  floor       String?
+  propertyType String
+  bedrooms    Int      @default(1)
+  bathrooms   Int      @default(1)
+  features    String
+  description String
+  images      String
+  petFriendly Boolean  @default(false)
+  allowSubsidy Boolean @default(false)
+  budgetTier  String   @default("standard")
+  status      String   @default("available")
+  latitude    Float?
+  longitude   Float?
+  agentId     String
+  agent       Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  inquiries   Inquiry[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([district])
+  @@index([status])
+}
+
+model News {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  excerpt   String
+  body      String
+  coverUrl  String?
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Guide {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  category  String
+  body      String
+  coverUrl  String?
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  tenantName String
+  rating     Int
+  quote      String
+  location   String?
+  approved   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+}
+
+model Inquiry {
+  id         String   @id @default(cuid())
+  name       String
+  phone      String
+  lineId     String?
+  message    String
+  propertyId String?
+  property   Property? @relation(fields: [propertyId], references: [id], onDelete: SetNull)
+  agentId    String?
+  agent      Agent?   @relation(fields: [agentId], references: [id], onDelete: SetNull)
+  status     String   @default("new")
+  createdAt  DateTime @default(now())
+}
